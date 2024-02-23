@@ -1,20 +1,60 @@
-// Meet in the Middle.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/*
+    Leonardo Gonzalez   2/22/2024
+    
+    Week 6              Meet in the Middle
+*/
 
 #include <iostream>
+#include <fstream>
+#include "DynamicArray.h"
+using namespace std;
+
+int digitMultiplier(int);
+int createNumber(DynamicArray);
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	string data;
+	ifstream file; //ifstream lets us read data from a file
+
+	file.open("C:\\Users\\Leo\\Desktop\\data.txt", ios::in); //Opens file "data.txt" using the File path to data.txt
+
+	file >> data;	//Sends the line of text to string data
+
+	cout << data << endl;
+		
+	file.close();	//Closes File
+	
+	DynamicArray numArray;
+	DynamicArray num;
+
+	for (int i = 0; i < data.size(); i++) {
+		if (data[i] != ',') {
+			num.append_element(data[i] - 48);
+		}
+		else {
+			numArray.append_element(createNumber(num));
+			num.reset();
+		}
+	}
+
+	for (int i = 0; i < numArray.size(); i++) {
+		cout << numArray.get_element_at_index(i) << endl;
+	}
+	
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+int digitMultiplier(int exponent) {
+	if (exponent == 0) {
+		return 1;
+	}
+	return 10 * digitMultiplier(exponent--);
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+int createNumber(DynamicArray num) {
+	int number = 0;
+	for (int i = 0; i < num.size(); i++) {
+		number += num.get_element_at_index(i) * digitMultiplier(i);
+	}
+	return number;
+}
