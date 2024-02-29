@@ -31,10 +31,14 @@ int main()
 	for (int i = 0; i < data.size(); i++) {
 		if (data[i] != ',') {
 			num.append_element(data[i] - 48);
+			cout << "num get element = " << num.get_element_at_index(num.size() - 1) << endl;
 		}
 		else {
 			numArray.append_element(createNumber(num));
+			cout << "numArray get element = " << numArray.get_element_at_index(num.size() - 1) << endl;
+
 			num.reset();
+			cout << "num reset" << endl;
 		}
 	}
 
@@ -56,5 +60,6 @@ int createNumber(DynamicArray num) {
 	for (int i = 0; i < num.size(); i++) {
 		number += num.get_element_at_index(i) * digitMultiplier(i);
 	}
+	cout << "number created = " << number << endl;
 	return number;
 }

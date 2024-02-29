@@ -11,4 +11,3 @@ public:
 	int size();
 	void reset();
 };
-
