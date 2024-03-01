@@ -17,14 +17,19 @@ int main()
 	string data;
 	ifstream file; //ifstream lets us read data from a file
 
-	file.open("C:\\Users\\935bl\\Desktop\\data.txt", ios::in); //Opens file "data.txt" using the File path to data.txt
-
+	//Include this group of code you are using a text file to grab the numbers
+	/*
+	file.open("C:\\Users\\Leo\\Desktop\\data.txt", ios::in); //Opens file "data.txt" using the File path to data.txt
 	file >> data;	//Sends the line of text to string data
-
 	cout << data << endl;
-		
 	file.close();	//Closes File
+	*/
+
+	//Include this if you are not using a text file
 	
+	data = "1,2,6,8,9,11,27,45,71,90,104";
+	
+
 	DynamicArray numArray;
 	DynamicArray num;
 
@@ -57,10 +62,10 @@ int digitMultiplier(int exponent) {
 
 int createNumber(DynamicArray num) {
 	int number = 0;
-	int mult = 0;
-	for (int i = num.size() - 1; i > -1; i--) {
-		cout << num.get_element_at_index(i) << endl;
-		number += num.get_element_at_index(i) * digitMultiplier(i + 1);
+	
+	for (int i = 0; i < num.size(); i++) {
+		cout << "current number in num = " << num.get_element_at_index(num.size() - 1 - i) << endl;
+		number += num.get_element_at_index(num.size() - 1 - i) * digitMultiplier(i + 1);
 	}
 	return number;
 }
