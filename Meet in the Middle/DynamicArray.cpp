@@ -6,9 +6,7 @@ int* DynamicArray::resize() {
 	for (int i = 0; i < size(); i++) {
 		tempArray[i] = array[i];
 	}
-	std::cout << "Transfer" << std::endl;
 	delete[] array;
-	std:: cout << "Deleted" << std::endl;
 	top++;
 	return tempArray;
 }
@@ -27,6 +25,5 @@ int DynamicArray::size() {
 	return top + 1;
 }
 void DynamicArray::reset() {
-	delete[] array;
 	top = -1;
 }
