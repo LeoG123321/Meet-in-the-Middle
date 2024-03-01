@@ -11,6 +11,7 @@ using namespace std;
 
 int digitMultiplier(int);
 int createNumber(DynamicArray);
+int median(DynamicArray);
 
 int main()
 {
@@ -28,7 +29,7 @@ int main()
 	//Include this if you are not using a text file
 	
 	data = "1,2,6,8,9,11,27,45,71,90,104";
-	
+	cout << data << endl;
 
 	DynamicArray numArray;
 	DynamicArray num;
@@ -45,15 +46,11 @@ int main()
 	}
 	numArray.append_element(createNumber(num));
 
-
-	for (int i = 0; i < numArray.size(); i++) {
-		cout << numArray.get_element_at_index(i) << endl;
-	}
+	cout << "Median: " << median(numArray);
 	
 }
 
 int digitMultiplier(int exponent) {
-	cout << "exponent = " << exponent << endl;
 	if (exponent == 1) {
 		return 1;
 	}
@@ -64,8 +61,16 @@ int createNumber(DynamicArray num) {
 	int number = 0;
 	
 	for (int i = 0; i < num.size(); i++) {
-		cout << "current number in num = " << num.get_element_at_index(num.size() - 1 - i) << endl;
 		number += num.get_element_at_index(num.size() - 1 - i) * digitMultiplier(i + 1);
 	}
 	return number;
+}
+
+int median(DynamicArray numArray) {
+	if (numArray.size() % 2 == 1) {
+		return numArray.get_element_at_index(numArray.size() / 2);
+	}
+	else {
+		return (numArray.get_element_at_index(numArray.size() / 2) + numArray.get_element_at_index(numArray.size() / 2 - 1)) / 2;
+	}
 }
