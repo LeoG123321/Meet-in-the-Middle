@@ -31,7 +31,7 @@ int main()
 
 	//Include this if you are not using a text file
 	
-	data = "1,2,2,6,8,9,11,27,45,71,90,90,90,104";
+	data = "104,11,90,8,6,90,2,71,45,27,9,2,1";
 	cout << data << endl;
 
 	DynamicArray numArray;
@@ -49,9 +49,30 @@ int main()
 	}
 	numArray.append_element(createNumber(num));
 
+	cout << endl;
+	cout << "Unsorted Data: " << endl;
 	for (int i = 0; i < numArray.size(); i++) {
 		cout << numArray.get_element_at_index(i) << endl;
 	}
+
+	int temp;
+
+	for (int i = 0; i < numArray.size(); i++) {
+		for (int j = 0; j < numArray.size() - 1; j++) {
+			if (numArray.get_element_at_index(j) > numArray.get_element_at_index(j + 1)) {
+				temp = numArray.get_element_at_index(j);
+				numArray.set_element_at_index(j, numArray.get_element_at_index(j + 1));
+				numArray.set_element_at_index(j + 1, temp);
+			}
+		}
+	}
+
+	cout << endl;
+	cout << "Sorted Data: " << endl;
+	for (int i = 0; i < numArray.size(); i++) {
+		cout << numArray.get_element_at_index(i) << endl;
+	}
+
 	cout << endl;
 	cout << "Median: " << median(numArray) << endl;
 	cout << "Mean: " << mean(numArray) << endl;
