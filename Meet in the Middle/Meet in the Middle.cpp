@@ -13,6 +13,8 @@ int digitMultiplier(int);
 int createNumber(DynamicArray);
 int median(DynamicArray);
 
+double mean(DynamicArray);
+
 int main()
 {
 	string data;
@@ -34,7 +36,7 @@ int main()
 	DynamicArray numArray;
 	DynamicArray num;
 
-	for (int i = 0; i < data.size(); i++) {
+	for (int i = 0; i < data.size(); i++) { 
 		if (data[i] != ',') {
 			num.append_element(data[i] - 48);
 		}
@@ -46,8 +48,12 @@ int main()
 	}
 	numArray.append_element(createNumber(num));
 
-	cout << "Median: " << median(numArray);
-	
+	for (int i = 0; i < numArray.size(); i++) {
+		cout << numArray.get_element_at_index(i) << endl;
+	}
+	cout << endl;
+	cout << "Median: " << median(numArray) << endl;
+	cout << "Mean: " << mean(numArray) << endl;
 }
 
 int digitMultiplier(int exponent) {
@@ -73,4 +79,12 @@ int median(DynamicArray numArray) {
 	else {
 		return (numArray.get_element_at_index(numArray.size() / 2) + numArray.get_element_at_index(numArray.size() / 2 - 1)) / 2;
 	}
+}
+
+double mean(DynamicArray numArray) {
+	double total = 0;
+	for (int i = 0; i < numArray.size(); i++) {
+		total += numArray.get_element_at_index(i);
+	}
+	return total / numArray.size();
 }
