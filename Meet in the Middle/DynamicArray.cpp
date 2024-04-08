@@ -27,3 +27,7 @@ int DynamicArray::size() {
 void DynamicArray::reset() {
 	top = -1;
 }
+
+void DynamicArray::set_element_at_index(int index, int value) {
+	array[index] = value;
+}

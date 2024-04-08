@@ -14,6 +14,7 @@ int createNumber(DynamicArray);
 int median(DynamicArray);
 
 double mean(DynamicArray);
+DynamicArray mode(DynamicArray numArray);
 
 int main()
 {
@@ -30,7 +31,7 @@ int main()
 
 	//Include this if you are not using a text file
 	
-	data = "1,2,6,8,9,11,27,45,71,90,104";
+	data = "1,2,2,6,8,9,11,27,45,71,90,90,90,104";
 	cout << data << endl;
 
 	DynamicArray numArray;
@@ -54,6 +55,13 @@ int main()
 	cout << endl;
 	cout << "Median: " << median(numArray) << endl;
 	cout << "Mean: " << mean(numArray) << endl;
+
+	DynamicArray modes = mode(numArray);
+
+	cout << "Modes: " << endl;
+	for (int i = 0; i < modes.size(); i++) {
+		cout << modes.get_element_at_index(i) << endl;
+	}
 }
 
 int digitMultiplier(int exponent) {
@@ -87,4 +95,41 @@ double mean(DynamicArray numArray) {
 		total += numArray.get_element_at_index(i);
 	}
 	return total / numArray.size();
+}
+
+DynamicArray mode(DynamicArray numArray) {
+	DynamicArray num_list;
+	DynamicArray num_counters;
+	bool duplicate_num_flag = false;
+	int index;
+	for (int i = 0; i < numArray.size(); i++) {
+		for (int j = 0; j < num_list.size(); j++) {
+			if (numArray.get_element_at_index(i) == num_list.get_element_at_index(j)) {
+				duplicate_num_flag = true;
+				num_counters.set_element_at_index(j, num_counters.get_element_at_index(j) + 1);
+			}
+		}
+		if (!duplicate_num_flag) {
+			num_list.append_element(numArray.get_element_at_index(i));
+			num_counters.append_element(1);
+		}
+		duplicate_num_flag = false;
+	}
+
+	int largest_num = 0;
+
+	for (int i = 0; i < num_counters.size(); i++) {
+		if (num_counters.get_element_at_index(i) > largest_num) {
+			largest_num = num_counters.get_element_at_index(i);
+		}
+	}
+
+	DynamicArray modes;
+	for (int i = 0; i < num_counters.size(); i++) {
+		if (num_counters.get_element_at_index(i) == largest_num) {
+			modes.append_element(num_list.get_element_at_index(i));
+		}
+	}
+
+	return modes;
 }
